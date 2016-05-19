@@ -15,10 +15,9 @@ template<class T, const size_t MAX_SIZE>
 class Array
 {
 private:
-	T *internalTable;
-	uint8_t buffer[sizeof(T) * MAX_SIZE];
 	uint8_t maxSize;
 	uint8_t size;
+	uint8_t buffer[sizeof(T) * MAX_SIZE];
 public:
 	Array();
 
@@ -31,7 +30,6 @@ public:
 
 template <class T, const size_t MAX_SIZE>
 Array<T, MAX_SIZE>::Array() {
-	this->internalTable = buffer;
 	this->maxSize = MAX_SIZE;
 	this->size = 0;
 }
@@ -52,7 +50,7 @@ bool Array<T, MAX_SIZE>::add(T* object) {
 		return false;
 	}
 
-	memcpy(internalTable + size, object, sizeof(T));
+	memcpy(buffer + size, object, sizeof(T));
 	size ++;
 
 	return true;
@@ -60,7 +58,7 @@ bool Array<T, MAX_SIZE>::add(T* object) {
 
 template <class T, const size_t MAX_SIZE>
 T* Array<T, MAX_SIZE>::get(uint8_t index) {
-	return (internalTable + index);
+	return (buffer + index);
 }
 
 template <class T, const size_t MAX_SIZE>
@@ -81,7 +79,7 @@ void Array<T, MAX_SIZE>::remove(uint8_t index) {
 
 	// need to shift left
 	for(uint8_t q = index ; q < size - 1 ; q ++) {
-		memcpy(internalTable + q, internalTable + q + 1, sizeof(T));
+		memcpy(buffer + q, buffer + q + 1, sizeof(T));
 	}
 
 	size --;
