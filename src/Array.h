@@ -11,16 +11,16 @@
 #include <stdint.h>
 #include <string.h>
 
-template<class T>
+template<class T, const size_t MAX_SIZE>
 class Array
 {
 private:
 	T *internalTable;
+	uint8_t buffer[sizeof(T) * MAX_SIZE];
 	uint8_t maxSize;
-
 	uint8_t size;
 public:
-	Array(T* internalTable, uint8_t maxSize);
+	Array();
 
 	uint8_t getSize();
 	uint8_t getMaxSize();
@@ -29,25 +29,25 @@ public:
 	void remove(uint8_t index);
 };
 
-template <class T>
-Array<T>::Array(T* internalTable, uint8_t maxSize) {
-	this->internalTable = internalTable;
-	this->maxSize = maxSize;
+template <class T, const size_t MAX_SIZE>
+Array<T, MAX_SIZE>::Array() {
+	this->internalTable = buffer;
+	this->maxSize = MAX_SIZE;
 	this->size = 0;
 }
 
-template <class T>
-uint8_t Array<T>::getSize() {
+template <class T, const size_t MAX_SIZE>
+uint8_t Array<T, MAX_SIZE>::getSize() {
 	return this->size;
 }
 
-template <class T>
-uint8_t Array<T>::getMaxSize() {
+template <class T, const size_t MAX_SIZE>
+uint8_t Array<T, MAX_SIZE>::getMaxSize() {
 	return this->maxSize;
 }
 
-template <class T>
-bool Array<T>::add(T* object) {
+template <class T, const size_t MAX_SIZE>
+bool Array<T, MAX_SIZE>::add(T* object) {
 	if(size == maxSize) {
 		return false;
 	}
@@ -58,13 +58,13 @@ bool Array<T>::add(T* object) {
 	return true;
 }
 
-template <class T>
-T* Array<T>::get(uint8_t index) {
+template <class T, const size_t MAX_SIZE>
+T* Array<T, MAX_SIZE>::get(uint8_t index) {
 	return (internalTable + index);
 }
 
-template <class T>
-void Array<T>::remove(uint8_t index) {
+template <class T, const size_t MAX_SIZE>
+void Array<T, MAX_SIZE>::remove(uint8_t index) {
 	if(size == 0) {
 		return;
 	}

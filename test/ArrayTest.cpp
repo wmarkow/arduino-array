@@ -5,14 +5,12 @@
 
 
 #include "../src/Array.h"
-#include "../src/Array2.h"
 
 #define MAX_COUNT 3
 
 BOOST_AUTO_TEST_CASE(testConstructor)
 {
-	uint8_t internalTable[MAX_COUNT];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 0);
@@ -20,7 +18,7 @@ BOOST_AUTO_TEST_CASE(testConstructor)
 
 BOOST_AUTO_TEST_CASE(testConstructor2)
 {
-	Array2<uint8_t, 5> list = Array2<uint8_t, 5>();
+	Array<uint8_t, 5> list = Array<uint8_t, 5>();
 
 	BOOST_CHECK(list.getMaxSize() == 5);
 	BOOST_CHECK(list.getSize() == 0);
@@ -28,8 +26,7 @@ BOOST_AUTO_TEST_CASE(testConstructor2)
 
 
 BOOST_AUTO_TEST_CASE(testAddUntilFull) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value = 123;
 
@@ -51,8 +48,7 @@ BOOST_AUTO_TEST_CASE(testAddUntilFull) {
 }
 
 BOOST_AUTO_TEST_CASE(testGet) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
 	uint8_t value2 = 23;
@@ -68,8 +64,7 @@ BOOST_AUTO_TEST_CASE(testGet) {
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveWhenZeroSize) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	list.remove(0);
 
@@ -77,8 +72,7 @@ BOOST_AUTO_TEST_CASE(testRemoveWhenZeroSize) {
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveWhenIndexOutOfArray) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
 	uint8_t value2 = 23;
@@ -97,8 +91,7 @@ BOOST_AUTO_TEST_CASE(testRemoveWhenIndexOutOfArray) {
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveLast) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
 	uint8_t value2 = 23;
@@ -116,8 +109,7 @@ BOOST_AUTO_TEST_CASE(testRemoveLast) {
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveInside) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
 	uint8_t value2 = 23;
@@ -135,8 +127,7 @@ BOOST_AUTO_TEST_CASE(testRemoveInside) {
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveFirst) {
-	uint8_t internalTable[3];
-	Array<uint8_t> list = Array<uint8_t>(internalTable, MAX_COUNT);
+	Array<uint8_t, MAX_COUNT> list = Array<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
 	uint8_t value2 = 23;
