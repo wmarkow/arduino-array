@@ -5,6 +5,7 @@
 
 
 #include "../src/Array.h"
+#include "Fixture.h"
 
 #define MAX_COUNT 3
 
@@ -142,4 +143,29 @@ BOOST_AUTO_TEST_CASE(testRemoveFirst) {
 	BOOST_CHECK(list.getSize() == 2);
 	BOOST_CHECK((*list.get(0)) == 23);
 	BOOST_CHECK((*list.get(1)) == 254);
+}
+
+BOOST_AUTO_TEST_CASE(testFixture) {
+	Array<Fixture, MAX_COUNT> list = Array<Fixture, MAX_COUNT>();
+
+	Fixture first;
+	Fixture second;
+	second.a = 1;
+	second.b = 2;
+	second.c = 12345;
+	second.buffer[0] = 255;
+	second.buffer[1] = 128;
+	second.buffer[2] = 25;
+
+	list.add(&first);
+	list.add(&second);
+	list.remove(0);
+
+	Fixture *result = list.get(0);
+	BOOST_CHECK(result->a == 1);
+	BOOST_CHECK(result->b == 2);
+	BOOST_CHECK(result->c == 12345);
+	BOOST_CHECK(result->buffer[0] == 255);
+	BOOST_CHECK(result->buffer[1] == 128);
+	BOOST_CHECK(result->buffer[2] == 25);
 }

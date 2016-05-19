@@ -58,7 +58,7 @@ bool Array<T, MAX_SIZE>::add(T* object) {
 
 template <class T, const size_t MAX_SIZE>
 T* Array<T, MAX_SIZE>::get(uint8_t index) {
-	return (buffer + index);
+	return (T*) (buffer + index);
 }
 
 template <class T, const size_t MAX_SIZE>
