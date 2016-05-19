@@ -5,22 +5,23 @@
  *      Author: witek
  */
 
-#ifndef STATICVECTOR_H_
-#define STATICVECTOR_H_
+#ifndef ARRAY2_H_
+#define ARRAY2_H_
 
 #include <stdint.h>
 #include <string.h>
 
-template<class T>
-class StaticVector
+template<typename T, const size_t MAX_SIZE_>
+class Array2
 {
 private:
 	T *internalTable;
 	uint8_t maxSize;
-
 	uint8_t size;
+
+	uint8_t buffer[sizeof(T) * MAX_SIZE_];
 public:
-	StaticVector(T* internalTable, uint8_t maxSize);
+	Array2();
 
 	uint8_t getSize();
 	uint8_t getMaxSize();
@@ -29,25 +30,25 @@ public:
 	void remove(uint8_t index);
 };
 
-template <class T>
-StaticVector<T>::StaticVector(T* internalTable, uint8_t maxSize) {
-	this->internalTable = internalTable;
-	this->maxSize = maxSize;
+template <typename T, const size_t MAX_SIZE_>
+Array2<T, MAX_SIZE_>::Array2() {
+	this->internalTable = buffer;
+	this->maxSize = MAX_SIZE_;
 	this->size = 0;
 }
 
-template <class T>
-uint8_t StaticVector<T>::getSize() {
+template <typename T, const size_t MAX_SIZE_>
+uint8_t Array2<T, MAX_SIZE_>::getSize() {
 	return this->size;
 }
 
-template <class T>
-uint8_t StaticVector<T>::getMaxSize() {
+template <typename T, const size_t MAX_SIZE_>
+uint8_t Array2<T, MAX_SIZE_>::getMaxSize() {
 	return this->maxSize;
 }
 
-template <class T>
-bool StaticVector<T>::add(T* object) {
+template <typename T, const size_t MAX_SIZE_>
+bool Array2<T, MAX_SIZE_>::add(T* object) {
 	if(size == maxSize) {
 		return false;
 	}
@@ -58,13 +59,13 @@ bool StaticVector<T>::add(T* object) {
 	return true;
 }
 
-template <class T>
-T* StaticVector<T>::get(uint8_t index) {
+template <typename T, const size_t MAX_SIZE_>
+T* Array2<T, MAX_SIZE_>::get(uint8_t index) {
 	return (internalTable + index);
 }
 
-template <class T>
-void StaticVector<T>::remove(uint8_t index) {
+template <typename T, const size_t MAX_SIZE_>
+void Array2<T, MAX_SIZE_>::remove(uint8_t index) {
 	if(size == 0) {
 		return;
 	}
@@ -87,4 +88,4 @@ void StaticVector<T>::remove(uint8_t index) {
 	size --;
 }
 
-#endif /* STATICVECTOR_H_ */
+#endif /* ARRAY2_H_ */
