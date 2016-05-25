@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(testAddUntilFull) {
 	BOOST_CHECK(list.getSize() == 3);
 }
 
-BOOST_AUTO_TEST_CASE(testGet) {
+BOOST_AUTO_TEST_CASE(testPeek) {
 	FixedSizeArray<uint8_t, MAX_COUNT> list = FixedSizeArray<uint8_t, MAX_COUNT>();
 
 	uint8_t value1 = 123;
@@ -60,9 +60,9 @@ BOOST_AUTO_TEST_CASE(testGet) {
 	list.add(&value2);
 	list.add(&value3);
 
-	BOOST_CHECK((*list.get(0)) == 123);
-	BOOST_CHECK((*list.get(1)) == 23);
-	BOOST_CHECK((*list.get(2)) == 254);
+	BOOST_CHECK((*list.peek(0)) == 123);
+	BOOST_CHECK((*list.peek(1)) == 23);
+	BOOST_CHECK((*list.peek(2)) == 254);
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveWhenZeroSize) {
@@ -87,9 +87,9 @@ BOOST_AUTO_TEST_CASE(testRemoveWhenIndexOutOfArray) {
 	list.remove(3);
 
 	BOOST_CHECK(list.getSize() == 3);
-	BOOST_CHECK((*list.get(0)) == 123);
-	BOOST_CHECK((*list.get(1)) == 23);
-	BOOST_CHECK((*list.get(2)) == 254);
+	BOOST_CHECK((*list.peek(0)) == 123);
+	BOOST_CHECK((*list.peek(1)) == 23);
+	BOOST_CHECK((*list.peek(2)) == 254);
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveLast) {
@@ -106,8 +106,8 @@ BOOST_AUTO_TEST_CASE(testRemoveLast) {
 	list.remove(2);
 
 	BOOST_CHECK(list.getSize() == 2);
-	BOOST_CHECK((*list.get(0)) == 123);
-	BOOST_CHECK((*list.get(1)) == 23);
+	BOOST_CHECK((*list.peek(0)) == 123);
+	BOOST_CHECK((*list.peek(1)) == 23);
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveInside) {
@@ -124,8 +124,8 @@ BOOST_AUTO_TEST_CASE(testRemoveInside) {
 	list.remove(1);
 
 	BOOST_CHECK(list.getSize() == 2);
-	BOOST_CHECK((*list.get(0)) == 123);
-	BOOST_CHECK((*list.get(1)) == 254);
+	BOOST_CHECK((*list.peek(0)) == 123);
+	BOOST_CHECK((*list.peek(1)) == 254);
 }
 
 BOOST_AUTO_TEST_CASE(testRemoveFirst) {
@@ -142,8 +142,8 @@ BOOST_AUTO_TEST_CASE(testRemoveFirst) {
 	list.remove(0);
 
 	BOOST_CHECK(list.getSize() == 2);
-	BOOST_CHECK((*list.get(0)) == 23);
-	BOOST_CHECK((*list.get(1)) == 254);
+	BOOST_CHECK((*list.peek(0)) == 23);
+	BOOST_CHECK((*list.peek(1)) == 254);
 }
 
 BOOST_AUTO_TEST_CASE(testFixture) {
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(testFixture) {
 	list.add(&second);
 	list.remove(0);
 
-	Fixture *result = list.get(0);
+	Fixture *result = list.peek(0);
 	BOOST_CHECK(result->a == 1);
 	BOOST_CHECK(result->b == 2);
 	BOOST_CHECK(result->c == 12345);
@@ -188,7 +188,7 @@ BOOST_AUTO_TEST_CASE(testFixtureWithCastingToPointer) {
 	array->add(&second);
 	array->remove(0);
 
-	Fixture *result = array->get(0);
+	Fixture *result = array->peek(0);
 	BOOST_CHECK(result->a == 1);
 	BOOST_CHECK(result->b == 2);
 	BOOST_CHECK(result->c == 12345);

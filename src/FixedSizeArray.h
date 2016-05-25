@@ -16,13 +16,15 @@ class FixedSizeArray : public Array<T>
 private:
 	uint8_t maxSize;
 	uint8_t size;
-	uint8_t buffer[sizeof(T) * MAX_SIZE];
+	T buffer[MAX_SIZE];
 public:
 	FixedSizeArray();
 
 	uint8_t getSize();
 	uint8_t getMaxSize();
-	T* get(uint8_t index);
+	T get(uint8_t index);
+	T* peek(uint8_t index);
+	bool add(T object);
 	bool add(T* object);
 	void remove(uint8_t index);
 };
@@ -44,6 +46,18 @@ uint8_t FixedSizeArray<T, MAX_SIZE>::getMaxSize() {
 }
 
 template <class T, const size_t MAX_SIZE>
+bool FixedSizeArray<T, MAX_SIZE>::add(T object) {
+	if(this->size == this->maxSize) {
+		return false;
+	}
+
+	memcpy(buffer + this->size, &object, sizeof(T));
+	this->size ++;
+
+	return true;
+}
+
+template <class T, const size_t MAX_SIZE>
 bool FixedSizeArray<T, MAX_SIZE>::add(T* object) {
 	if(this->size == this->maxSize) {
 		return false;
@@ -56,7 +70,12 @@ bool FixedSizeArray<T, MAX_SIZE>::add(T* object) {
 }
 
 template <class T, const size_t MAX_SIZE>
-T* FixedSizeArray<T, MAX_SIZE>::get(uint8_t index) {
+T FixedSizeArray<T, MAX_SIZE>::get(uint8_t index) {
+	return buffer[index];
+}
+
+template <class T, const size_t MAX_SIZE>
+T* FixedSizeArray<T, MAX_SIZE>::peek(uint8_t index) {
 	return (T*) (buffer + index);
 }
 
