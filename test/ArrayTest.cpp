@@ -16,16 +16,9 @@ BOOST_AUTO_TEST_CASE(testConstructor)
 
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 0);
+	BOOST_CHECK(list.isEmpty());
+	BOOST_CHECK(!list.isFull());
 }
-
-BOOST_AUTO_TEST_CASE(testConstructor2)
-{
-	FixedSizeArray<uint8_t, 5> list;// = FixedSizeArray<uint8_t, 5>();
-
-	BOOST_CHECK(list.getMaxSize() == 5);
-	BOOST_CHECK(list.getSize() == 0);
-}
-
 
 BOOST_AUTO_TEST_CASE(testAddUntilFull) {
 	FixedSizeArray<uint8_t, MAX_COUNT> list = FixedSizeArray<uint8_t, MAX_COUNT>();
@@ -35,18 +28,26 @@ BOOST_AUTO_TEST_CASE(testAddUntilFull) {
 	BOOST_CHECK(list.add(&value));
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 1);
+	BOOST_CHECK(!list.isEmpty());
+	BOOST_CHECK(!list.isFull());
 
 	BOOST_CHECK(list.add(&value));
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 2);
+	BOOST_CHECK(!list.isEmpty());
+	BOOST_CHECK(!list.isFull());
 
 	BOOST_CHECK(list.add(&value));
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 3);
+	BOOST_CHECK(!list.isEmpty());
+	BOOST_CHECK(list.isFull());
 
 	BOOST_CHECK(!list.add(&value));
 	BOOST_CHECK(list.getMaxSize() == MAX_COUNT);
 	BOOST_CHECK(list.getSize() == 3);
+	BOOST_CHECK(!list.isEmpty());
+	BOOST_CHECK(list.isFull());
 }
 
 BOOST_AUTO_TEST_CASE(testPeek) {

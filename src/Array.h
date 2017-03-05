@@ -22,6 +22,18 @@ public:
 	virtual bool add(T object) = 0;
 	virtual bool add(T* object) = 0;
 	virtual void remove(uint8_t index) = 0;
+	bool isFull();
+	bool isEmpty();
 };
+
+template<class T>
+bool Array<T>::isFull() {
+	return getSize() == getMaxSize();
+}
+
+template<class T>
+bool Array<T>::isEmpty() {
+	return getSize() == 0;
+}
 
 #endif /* ARRAY_H_ */
