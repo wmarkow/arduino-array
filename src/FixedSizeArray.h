@@ -27,6 +27,7 @@ public:
 	bool add(T object);
 	bool add(T* object);
 	void remove(uint8_t index);
+	void clear();
 };
 
 template <class T, const size_t MAX_SIZE>
@@ -101,6 +102,11 @@ void FixedSizeArray<T, MAX_SIZE>::remove(uint8_t index) {
 	}
 
 	this->size --;
+}
+
+template <class T, const size_t MAX_SIZE>
+void FixedSizeArray<T, MAX_SIZE>::clear() {
+   this->size = 0;
 }
 
 #endif /* FIXEDSIZEARRAY_H_ */

@@ -22,6 +22,7 @@ public:
 	virtual bool add(T object) = 0;
 	virtual bool add(T* object) = 0;
 	virtual void remove(uint8_t index) = 0;
+	virtual void clear() = 0;
 	bool isFull();
 	bool isEmpty();
 };
