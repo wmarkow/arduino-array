@@ -9,7 +9,7 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
   <fileSets>
     <fileSet>
       <directory>${project.basedir}</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>${file.separator}</outputDirectory>
       <includes>
         <include>src/*</include>
         <include>library.properties</include>
@@ -18,7 +18,7 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
     </fileSet>
     <fileSet>
       <directory>${project.basedir}</directory>
-      <outputDirectory>/META-INF/maven/${project.groupId}/${project.artifactId}</outputDirectory>
+      <outputDirectory>${file.separator}META-INF${file.separator}maven${file.separator}${project.groupId}${file.separator}${project.artifactId}</outputDirectory>
       <includes>
         <include>pom.xml</include>
       </includes>
