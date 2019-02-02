@@ -16,5 +16,12 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
         <include>README.md</include>
       </includes>
     </fileSet>
+    <fileSet>
+      <directory>${project.basedir}</directory>
+      <outputDirectory>/META-INF/maven/${project.groupId}/${project.artifactId}</outputDirectory>
+      <includes>
+        <include>pom.xml</include>
+      </includes>
+    </fileSet>
   </fileSets>
 </assembly>
